@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   //This property defines where the application starts
@@ -21,9 +22,11 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: 'babel-loader'
+      },
+      {
+        test: /\.(css|scss)$/i,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -32,6 +35,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'image-gallery.css'
     })
   ]
 }

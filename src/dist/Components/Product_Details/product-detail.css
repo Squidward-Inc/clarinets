@@ -1,0 +1,17 @@
+.image-gallery {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.image-gallery-slide img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 60vh !important;
+  object-fit: contain !important;
+  overflow: hidden! important;
+  object-position: center center !important;
+}
+
+.fullscreen .image-gallery-slide img {
+  max-height: 700px !important;
+}

@@ -12,6 +12,9 @@ import SearchBar from './SearchBar.jsx';
 import Style from './Style.jsx';
 import AddToCart from './AddToCart.jsx';
 import Form from 'react-bootstrap/Form';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import './product-detail.css'
 
 export default function ProductDetail({ product, setProduct }) {
 
@@ -51,6 +54,21 @@ export default function ProductDetail({ product, setProduct }) {
     setIndex(Number(evt.currentTarget.getAttribute('data-index')));
   }
 
+  const images = [
+  {
+    original: 'https://picsum.photos/id/1018/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1018/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1015/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1015/250/150/',
+  },
+  {
+    original: 'https://picsum.photos/id/1019/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1019/250/150/',
+  },
+];
+
   return (
     <Container fluid>
 
@@ -64,41 +82,17 @@ export default function ProductDetail({ product, setProduct }) {
       </Row>
 
       <Row>
-        <Col xs={1}>
-          <Stack gap={3}>
-            {state.currentStylePhotos.map((pic, index) => {
-              return (
-                <Ratio aspectRatio={90}>
-                  <Image
-                    src={pic.thumbnail_url}
-                    thumbnail
-                    style={{ height: 'auto', width: '100%' }}
-                    data-index={index}
-                    onClick={handleThumbnailClick}
-                  />
-                </Ratio>
-              )
-            })}
-          </Stack>
+
+        <Col xs={8}>
+          <div height='200px'>
+            <ImageGallery items={state.currentStylePhotos.map(({thumbnail_url, url}) => ({
+              original: url,
+              thumbnail: thumbnail_url
+            }))} thumbnailPosition='left'/>
+          </div>
         </Col>
 
-        <Col xs={5}>
-          <Carousel activeIndex={index} onSelect={handleSelect} pause='hover' slide={true}>
-            {state.currentStylePhotos.map((pic) => {
-              return (
-                <Carousel.Item>
-                  <CarouselItem pic={pic} />
-                  <Carousel.Caption>
-                    <h3>Picture label</h3>
-                    <p>Some description</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              )
-            })}
-          </Carousel>
-        </Col>
-
-        <Col xs={5}>
+        <Col xs={4}>
           <Stack direction='horizontal' gap={1}>
             <i className="bi bi-star"></i>
             <i className="bi bi-star"></i>
@@ -129,6 +123,7 @@ export default function ProductDetail({ product, setProduct }) {
       </Row>
       <p></p>
     </Container>
+
   )
 };
 
