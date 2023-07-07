@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const {token, configPort} = require('./config.js');
+const {token, port} = require('./config.js');
 const axios = require('axios');
 const { createClient } = require('redis');
 const { chatter } = require('./server/chat.js');
@@ -13,7 +13,7 @@ const compression = require('compression');
 
 
 const app = express();
-const port = configPort || 3000;
+const configPort = port || 3000;
 const client = createClient();
 client.connect().then((response) => {
     console.log('Connected to redis.');
@@ -250,4 +250,5 @@ app.get('/service', (req, res) => {
     
 });
 
-app.listen(port, () => console.log(`app listening on port ${port}!`));
+app.listen(configPort, () => console.log(`app listening on port ${configPort}!`));
+

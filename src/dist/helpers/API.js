@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 
-axios.defaults.baseURL = `http://localhost:3000/api`;
+axios.defaults.baseURL = `${window.location.href}api`;
 let endpoints = {
     'GET_PRODUCTS' : '/products/',
     'GET_REVIEWS' : '/reviews/',
